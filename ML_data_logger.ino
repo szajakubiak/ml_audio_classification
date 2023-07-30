@@ -67,8 +67,6 @@ void returnSound() {
 
         samplesSent++;
         if (samplesSent >= samplesRec) {
-          SamplesSent = 0;
-          samplesRead = 0;
           break;
         }
       }
@@ -76,6 +74,7 @@ void returnSound() {
     // Clear the read count
     samplesRead = 0;
   }
+  samplesSent = 0;
 }
 
 void returnEnviro() {
@@ -104,20 +103,20 @@ void loop() {
       case 's':
         if (pdm_present) {
           returnSound();
-          break;
         }
         else {
           Serial.println("No microphone");
         }
+        break;
       
       case 'e':
         if (bme_present) {
           returnEnviro();
-          break;
         }
         else {
           Serial.println("No environmental sensor");
         }
+        break;
     }
   }
 }
