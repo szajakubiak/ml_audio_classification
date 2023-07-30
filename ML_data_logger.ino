@@ -59,6 +59,8 @@ void onPDMdata() {
 }
 
 void returnSound() {
+  onPDMdata();
+  samplesSent = 0;
   while (samplesSent < samplesRec) {
     if (samplesRead) {
       for (int i = 0; i < samplesRead; i++) {
@@ -74,7 +76,6 @@ void returnSound() {
     // Clear the read count
     samplesRead = 0;
   }
-  samplesSent = 0;
 }
 
 void returnEnviro() {
