@@ -59,7 +59,7 @@ void onPDMdata() {
 }
 
 void returnSound() {
-  onPDMdata();
+  samplesRead = 0;
   samplesSent = 0;
   while (samplesSent < samplesRec) {
     if (samplesRead) {
