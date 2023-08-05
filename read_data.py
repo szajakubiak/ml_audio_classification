@@ -19,7 +19,8 @@ def get_enviro():
             retry-=1
     return None
 
-def get_sound():
+def get_sound(start_delay = 0):
+    sleep(start_delay)
     p.write("s".encode())
     
     out = []
