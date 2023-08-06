@@ -9,6 +9,7 @@ Sound samples are recorded with respective labels using Python script, which rea
 
 ## TODO
 * Arduino - uffer audio data in memory before sending to serial port
+* Arduino - turn on microphone only when recording sample
 * Python - script to save .csv files with data and text file with labels lined to .csv files names
 * Jupyter notebook to train ML model
 
