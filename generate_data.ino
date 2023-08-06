@@ -12,11 +12,11 @@ static const int frequency = 16000;
 short sampleBuffer[512];
 // Number of audio samples read
 volatile int samplesRead;
-// Number of samples in recording
+// Target number of samples in recording
 // (seconds multiplied by frequency)
-static const int samplesRec = 1 * frequency;
-// Number of samples sent
-volatile int samplesSent = 0;
+static const int samplesRec = 0.05 * frequency;
+// Current number of samples in recording
+int samplesCurr = 0;
 
 // BME280 setup
 Adafruit_BME280 bme;
@@ -34,6 +34,8 @@ void setup() {
 
   // Initialize sensors
   pdm_present = PDM.begin(channels, frequency);
+  // Deinitilize microphone until needed
+  PDM.end();
   bme_present = bme.begin(0x76, &Wire);
 
   // configure for weather monitoring
@@ -59,16 +61,22 @@ void onPDMdata() {
 }
 
 void returnSound() {
+  PDM.begin(channels, frequency);
+  delay(100);
+  samplesCurr = 0;
+  // Recording
+  short recording[samplesRec * 16 + 16];
   samplesRead = 0;
-  samplesSent = 0;
-  while (samplesSent < samplesRec) {
+  
+  // Add samples from buffer to recording
+  while (samplesCurr <= samplesRec) {
     if (samplesRead) {
       for (int i = 0; i < samplesRead; i++) {
-        // Print samples to the serial monitor or plotter
-        Serial.println(sampleBuffer[i]);
+        // Store sample in recording
+        samplesCurr += 1;
+        recording[samplesCurr] = sampleBuffer[i];
 
-        samplesSent++;
-        if (samplesSent >= samplesRec) {
+        if (samplesCurr > samplesRec) {
           break;
         }
       }
@@ -76,6 +84,10 @@ void returnSound() {
     // Clear the read count
     samplesRead = 0;
   }
+  for (int i = 1; i <= samplesRec; i++) {
+    Serial.println(recording[i]);
+  }
+  PDM.end();
 }
 
 void returnEnviro() {
