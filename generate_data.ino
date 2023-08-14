@@ -130,6 +130,10 @@ void loop() {
           Serial.println("No environmental sensor");
         }
         break;
+      
+      case 'i':
+        Serial.println("arduino");
+        break;
     }
   }
 }
