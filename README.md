@@ -9,10 +9,10 @@ Sound samples are recorded with respective labels using Python script, which rea
 
 ## TODO
 * Python - clear serial port queue on start
-* Arduino - implement device identification
 * Python - select serial port automatically
 * Python - script to save .csv files with data and text file with labels lined to .csv files names
 * Jupyter notebook to train ML model
+* Arduino - consider replacing error messages with error codesS
 
 ## Links
 [TinyML tutorial on audio classification](https://blog.tensorflow.org/2021/09/TinyML-Audio-for-everyone.html)
