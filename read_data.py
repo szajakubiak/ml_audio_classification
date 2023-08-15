@@ -1,3 +1,4 @@
+import serial.tools.list_ports
 import serial
 from time import sleep
 
