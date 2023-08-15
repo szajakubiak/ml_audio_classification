@@ -4,8 +4,6 @@ from time import sleep
 
 baudrate = 115200
 
-p = serial.Serial(port, baudrate, timeout=1)
-
 def find_port():
     available_ports = list(serial.tools.list_ports.comports())
 
