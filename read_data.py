@@ -57,4 +57,3 @@ def get_sound(start_delay = 0):
         return out
     else:
         return None
-
