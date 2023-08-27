@@ -15,6 +15,7 @@ Sound samples are recorded with respective labels using Python script, which rea
 [Talking to an Arduino over Serial with Python](https://seanboe.github.io/blog/python-serial-with-arduino)
 
 ## TODO
+* Python - handle case when COM port was not found
 * Python - move request and incoming data parsing into function
 * Python - save .csv files with data and text file with labels linked to .csv files names
 * Jupyter notebook to train ML model
