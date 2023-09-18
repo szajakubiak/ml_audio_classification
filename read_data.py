@@ -1,6 +1,7 @@
 import serial.tools.list_ports
 import serial
 from time import sleep
+from datetime import datetime
 
 baudrate = 115200
 
@@ -57,3 +58,8 @@ def get_sound(start_delay = 0):
         return out
     else:
         return None
+
+def get_timestamp():
+    now = datetime.now()
+    timestamp = now.strftime("%Y-%m-%dT%H-%M-%S")
+    return timestamp
