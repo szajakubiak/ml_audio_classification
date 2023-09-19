@@ -63,3 +63,10 @@ def get_timestamp():
     now = datetime.now()
     timestamp = now.strftime("%Y-%m-%dT%H-%M-%S")
     return timestamp
+
+def save_data(folder, label, data):
+    filename = get_timestamp() + ".csv"
+    with open(filename, "w") as data_file:
+        data_file.write(data)
+    with open("labels.csv", "a") as label_file:
+        label_file.write(filename + "," + label)
