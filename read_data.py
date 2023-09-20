@@ -2,6 +2,7 @@ import serial.tools.list_ports
 import serial
 from time import sleep
 from datetime import datetime
+import os
 
 baudrate = 115200
 
@@ -66,7 +67,9 @@ def get_timestamp():
 
 def save_data(folder, label, data):
     filename = get_timestamp() + ".csv"
-    with open(filename, "w") as data_file:
+    rel_directory=os.path.relpath(folder, os.getcwd())
+    os.makedirs(os.path.dirname(rel_directory + "/"), exist_ok=True)
+    with open(rel_directory + "/" + filename, "w") as data_file:
         data_file.write(data)
-    with open("labels.csv", "a") as label_file:
-        label_file.write(filename + "," + label)
+    with open(rel_directory + "/" + "labels.csv", "a") as label_file:
+        label_file.write(filename + "," + label + "\n")
