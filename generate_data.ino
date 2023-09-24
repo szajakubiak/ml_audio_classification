@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
+#include <Arduino_LSM6DSOX.h>
 
 // PDM microphone setup
 // Default number of output channels
@@ -24,6 +25,7 @@ Adafruit_BME280 bme;
 // variables to store information which sensors are present
 bool pdm_present = false;
 bool bme_present = false;
+bool imu_present = false;
 
 void setup() {
   Serial.begin(115200);
@@ -37,6 +39,7 @@ void setup() {
   // Deinitilize microphone until needed
   PDM.end();
   bme_present = bme.begin(0x76, &Wire);
+  imu_present = IMU.begin();
 
   // configure for weather monitoring
   if (bme_present)
@@ -108,6 +111,32 @@ void returnEnviro() {
   Serial.println(buf);
 }
 
+void returnIMU() {
+  // create buffer for data
+  String buf;
+
+  float x, y, z;
+  if (IMU.accelerationAvailable()) {
+    IMU.readAcceleration(x, y, z);
+  }
+  buf += String(x, 2);
+  buf += F(",");
+  buf += String(y, 2);
+  buf += F(",");
+  buf += String(z, 2);
+  buf += F(",");
+  if (IMU.gyroscopeAvailable()) {
+    IMU.readGyroscope(x, y, z);
+  }
+  buf += String(x, 2);
+  buf += F(",");
+  buf += String(y, 2);
+  buf += F(",");
+  buf += String(z, 2);
+  
+  Serial.println(buf);
+}
+
 void loop() {
   while (Serial.available() > 0) {
     char incChar = Serial.read();
@@ -128,6 +157,15 @@ void loop() {
         }
         else {
           Serial.println("No environmental sensor");
+        }
+        break;
+      
+      case 'a':
+        if (imu_present) {
+          returnIMU();
+        }
+        else {
+          Serial.println("No inertial measurement unit");
         }
         break;
       
