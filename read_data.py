@@ -58,8 +58,14 @@ def get_sound(start_delay=0):
             sleep(0.05)
             retry -= 1
     p.close()
-    if len(out) > 0:
-        return out
+
+    out_str = ""
+    for element in out:
+        out_str += str(element) + "\n"
+    out_str = out_str[:-1]
+
+    if len(out_str) > 0:
+        return out_str
     else:
         return None
 
