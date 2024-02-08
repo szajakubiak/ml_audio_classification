@@ -5,13 +5,14 @@ from datetime import datetime
 import os
 
 BAUDRATE = 115200
+TIMEOUT = 1
 
 
 def find_port():
     available_ports = list(serial.tools.list_ports.comports())
 
     for port in available_ports:
-        p = serial.Serial(port.device, BAUDRATE, timeout=1)
+        p = serial.Serial(port.device, BAUDRATE, timeout=TIMEOUT)
         p.write("i".encode())
         retry = 20
         while retry:
@@ -27,7 +28,7 @@ def find_port():
 
 def get_enviro():
     port = find_port()
-    p = serial.Serial(port, BAUDRATE, timeout=1)
+    p = serial.Serial(port, BAUDRATE, timeout=TIMEOUT)
 
     p.write("e".encode())
 
@@ -44,7 +45,7 @@ def get_enviro():
 
 def get_sound(start_delay=0):
     port = find_port()
-    p = serial.Serial(port, BAUDRATE, timeout=1)
+    p = serial.Serial(port, BAUDRATE, timeout=TIMEOUT)
 
     sleep(start_delay)
     p.write("s".encode())
