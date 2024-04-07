@@ -21,3 +21,4 @@ Sound samples are recorded with respective labels using Python script, which rea
 * Python - move request and incoming data parsing into function
 * Jupyter notebook to train ML model
 * Arduino - consider replacing error messages with error codes
+* Arduino - collect several values for single measurement from accelerometer
