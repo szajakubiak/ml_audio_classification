@@ -44,8 +44,5 @@ You can skip *--no-browser* if you are using PC with Linux installed as a main O
 [Talking to an Arduino over Serial with Python](https://seanboe.github.io/blog/python-serial-with-arduino)
 
 ## TODO
-* Python - handle case when COM port was not found
-* Python - move request and incoming data parsing into function
-* Jupyter notebook to train ML model
-* Arduino - consider replacing error messages with error codes
-* Arduino - collect several values for single measurement from accelerometer
+* Handle case when COM port was not found
+* Move request and incoming data parsing into function
