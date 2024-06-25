@@ -5,7 +5,7 @@
 Record audio samples and their labels and use them to train ML model using TensorFlow.
 
 ## Methods
-Sound samples are recorded with respective labels using Python script, which reads serial data from [Arduino Nano RP2040 Connect](https://docs.arduino.cc/hardware/nano-rp2040-connect) board. Scripts sends a command to the Arduino to start sound registration and waits for the incoming data. 1 kHz sine wave generated using Audacity was used to verify that sound recording works as intended. TensorFlow ML model is trained in Jupyter notebook.
+Sound samples are recorded with respective labels using Python script, which reads serial data from [Arduino Nano RP2040 Connect](https://docs.arduino.cc/hardware/nano-rp2040-connect) board. As an addition I connected also the BME280 sensor capable of measuring basic environmental parameters. Details about building and programming this device are in [separate repository](https://github.com/szajakubiak/rp2040_enviro_logger). Python script sends a command to the Arduino to start sound registration and waits for the incoming data. 1 kHz sine wave generated using Audacity was used to verify that sound recording works as intended. TensorFlow ML model is trained in Jupyter notebook.
 
 ## Setup
 To run TensorFlow you need Linux OS. I recommend using Ubuntu or Debian. If you don't have a Linux PC you can install Ubuntu on Windows using WSL - just go to the Microsoft Store and search for Ubuntu. You should also be able to use Raspberry Pi with Raspberry Pi OS, but I haven't tested that.
