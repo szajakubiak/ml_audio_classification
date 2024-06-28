@@ -6,6 +6,7 @@ import os
 
 BAUDRATE = 115200
 TIMEOUT = 1
+ID_STRING = "arduino"
 
 
 def find_port():
@@ -22,7 +23,7 @@ def find_port():
                 sleep(0.01)
                 retry -= 1
         p.close()
-        if out == "arduino":
+        if out == ID_STRING:
             return port.device
 
 
