@@ -7,6 +7,7 @@ import os
 BAUDRATE = 115200
 TIMEOUT = 1
 ID_STRING = "arduino"
+RETRY_COUNT = 20
 
 
 def find_port():
@@ -15,7 +16,7 @@ def find_port():
     for port in available_ports:
         p = serial.Serial(port.device, BAUDRATE, timeout=TIMEOUT)
         p.write("i".encode())
-        retry = 20
+        retry = RETRY_COUNT
         while retry:
             if p.in_waiting:
                 out = p.readline().decode().rstrip()
@@ -33,7 +34,7 @@ def get_enviro():
 
     p.write("e".encode())
 
-    retry = 20
+    retry = RETRY_COUNT
     while retry:
         if p.in_waiting:
             out = p.readline().decode().rstrip()
@@ -52,10 +53,11 @@ def get_sound(start_delay=0):
     p.write("s".encode())
 
     out = []
-    retry = 40
+    retry = RETRY_COUNT
     while retry:
         if p.in_waiting:
             out.append(int(p.readline().decode().rstrip()))
+            retry = RETRY_COUNT
         else:
             sleep(0.05)
             retry -= 1
