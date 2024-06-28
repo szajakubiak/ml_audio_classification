@@ -38,6 +38,15 @@ jupyter lab --no-browser
 ```
 You can skip *--no-browser* if you are using PC with Linux installed as a main OS. In such case web browser will be opened with Jupyter Lab tab. If you are on a virtual Linux machine it's better to start web browser on your main system (Windows in my case) and paste in the adress bar link which you will get in the terminal window starting with *localhost:8888/lab* or *127.0.0.1:8888/lab*. Remember to copy the full link with the access token.
 
+## Generating training data
+To save the labelled sound sample you can use the *save_data* function:
+``` python
+import read_data
+
+read_data.save_data("samples", "music", read_data.get_sound())
+```
+This will create the *samples* directory (if it doesn't exist already) and store the sound data in the *.csv* file with current timestamp as it's name. It will also create (again - if it doesn't exist already) a *labels.csv* file with entry linking the data file name with the given label (*music* in this case).
+
 ## Links
 [TinyML tutorial on audio classification](https://blog.tensorflow.org/2021/09/TinyML-Audio-for-everyone.html)
 
