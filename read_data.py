@@ -74,6 +74,35 @@ def get_sound(start_delay=0):
         return None
 
 
+def get_imu(start_delay=0):
+    port = find_port()
+    p = serial.Serial(port, BAUDRATE, timeout=TIMEOUT)
+
+    sleep(start_delay)
+    p.write("a".encode())
+
+    out = []
+    retry = RETRY_COUNT
+    while retry:
+        if p.in_waiting:
+            out.append(p.readline().decode().rstrip())
+            retry = RETRY_COUNT
+        else:
+            sleep(0.05)
+            retry -= 1
+    p.close()
+
+    out_str = ""
+    for element in out:
+        out_str += str(element) + "\n"
+    out_str = out_str[:-1]
+
+    if len(out_str) > 0:
+        return out_str
+    else:
+        return None
+
+
 def get_timestamp():
     now = datetime.now()
     timestamp = now.strftime("%Y-%m-%dT%H-%M-%S")
