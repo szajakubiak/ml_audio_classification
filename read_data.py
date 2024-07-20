@@ -14,18 +14,21 @@ def find_port():
     available_ports = list(serial.tools.list_ports.comports())
 
     for port in available_ports:
-        p = serial.Serial(port.device, BAUDRATE, timeout=TIMEOUT)
-        p.write("i".encode())
-        retry = RETRY_COUNT
-        while retry:
-            if p.in_waiting:
-                out = p.readline().decode().rstrip()
-            else:
-                sleep(0.01)
-                retry -= 1
-        p.close()
-        if out == ID_STRING:
-            return port.device
+        try:
+            p = serial.Serial(port.device, BAUDRATE, timeout=TIMEOUT)
+            p.write("i".encode())
+            retry = RETRY_COUNT
+            while retry:
+                if p.in_waiting:
+                    out = p.readline().decode().rstrip()
+                else:
+                    sleep(0.01)
+                    retry -= 1
+            p.close()
+            if out == ID_STRING:
+                return port.device
+        except:
+            pass
 
 
 def get_enviro():
