@@ -1,4 +1,4 @@
-tensorflow[and-cuda]
 jupyterlab
 pandas
+tensorflow[and-cuda]>=2.17.0
 matplotlib
