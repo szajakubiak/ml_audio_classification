@@ -1,5 +1,5 @@
 # ml_audio_classification
- Audio classification using machine learning
+Audio classification using machine learning
 
 ## Goal
 Record audio samples and their labels and use them to train ML model using TensorFlow.
@@ -8,7 +8,7 @@ Record audio samples and their labels and use them to train ML model using Tenso
 Sound samples are recorded with respective labels using Python script, which reads serial data from [Arduino Nano RP2040 Connect](https://docs.arduino.cc/hardware/nano-rp2040-connect) board. As an addition I connected also the BME280 sensor capable of measuring basic environmental parameters. Details about building and programming this device are in [separate repository](https://github.com/szajakubiak/rp2040_enviro_logger). Python script sends a command to the Arduino to start sound registration and waits for the incoming data. 1 kHz sine wave generated using Audacity was used to verify that sound recording works as intended. TensorFlow ML model is trained in Jupyter notebook. TensorFlow may seem as an overkill for this application, but it's advantage is that trained model can be converted to be run on the microcontroller using [TensorFlow Lite](https://www.tensorflow.org/lite).
 
 ## Setup
-To run TensorFlow you need Linux OS. I recommend using Ubuntu or Debian. If you don't have a Linux PC you can install Ubuntu on Windows using WSL - just go to the Microsoft Store and search for Ubuntu. You should also be able to use Raspberry Pi with Raspberry Pi OS, but I haven't tested that.
+To run the TensorFlow you need a Linux system. I recommend using Ubuntu or Debian. If you don't have a Linux PC you can install Ubuntu on Windows system using WSL. The easiest option is to go to the Microsoft Store and search for Ubuntu. You should also be able to use Raspberry Pi computer flashed with Raspberry Pi OS, but I haven't tested that.
 
 ### Install required tools
 ``` bash
